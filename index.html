@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EarnSmart Dashboard</title>
+  <style>
+    body {
+      background: #0f1226;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .box {
+      background: #1c1f3a;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 200px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: purple;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>EarnSmart Dashboard</h1>
+
+<div class="box">
+  <h2>Total Balance: <span id="balance">0</span> USDT</h2>
+</div>
+
+<div class="box">
+  <h3>Deposit</h3>
+  <input type="number" id="amount" placeholder="Enter amount">
+  <br>
+  <button onclick="deposit()">Deposit Now</button>
+</div>
+
+<script>
+let balance = 0;
+
+function deposit() {
+  let amount = document.getElementById("amount").value;
+
+  if(amount <= 0){
+    alert("Enter valid amount");
+    return;
+  }
+
+  fetch("/api/create-deposit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ amount })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success){
+      checkDeposit(amount);
+    }
+  });
+}
+
+function checkDeposit(amount){
+  fetch("/api/check-deposit")
+  .then(res => res.json())
+  .then(data => {
+    if(data.status === "approved"){
+      balance += Number(amount);
+      document.getElementById("balance").innerText = balance;
+      alert("Deposit Successful");
+    }
+  });
+}
+</script>
+
+</body>
+</html>
