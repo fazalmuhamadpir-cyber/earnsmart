@@ -8,16 +8,16 @@ export default function handler(req, res) {
     });
   }
 
-  // 👇 tumhara wallet address (yahan apna real daalo)
-  const WALLET = "0xYOUR_WALLET_ADDRESS";
+  // ✅ tumhara wallet address
+  const WALLET = "0x22879e7dbcb2e6d2e1381dc8ff094cb75fb08e0c";
 
-  // 👇 exact random amount
+  // ✅ exact random amount generate
   const exactAmount = (Number(amount) + Math.random()).toFixed(6);
 
   res.json({
     success: true,
     exactAmount,
-    wallet: WALLET,   // ✅ IMPORTANT
+    wallet: WALLET,
     createdAt: Date.now()
   });
 }
