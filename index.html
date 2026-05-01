@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EarnSmart Wallet</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+    body{min-height:100vh;background:radial-gradient(circle at top left,#1e1b4b,#020617 55%,#000 100%);color:#f8fafc;overflow-x:hidden}
+    button,input{font:inherit}.hidden{display:none!important}.muted{color:#94a3b8;line-height:1.55;font-size:14px}.small{letter-spacing:4px;color:#93c5fd;font-size:12px;font-weight:800;text-transform:uppercase}.success{color:#22c55e}.error{color:#f87171}.warn{color:#facc15}
+    .auth-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.container,.card{background:linear-gradient(180deg,rgba(255,255,255,.105),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.12);border-radius:26px;box-shadow:0 24px 70px rgba(0,0,0,.42);backdrop-filter:blur(18px)}.container{width:100%;max-width:470px;padding:24px}.brand{text-align:center;margin-bottom:22px}h1{font-size:34px;background:linear-gradient(90deg,#dbeafe,#60a5fa,#a78bfa);-webkit-background-clip:text;color:transparent}h2{font-size:24px;margin-bottom:12px}.tabs{display:flex;background:rgba(255,255,255,.07);padding:5px;border-radius:16px;margin:18px 0}.tabs button{flex:1;border:0;background:transparent;color:#cbd5e1;padding:12px;border-radius:13px;font-weight:800;cursor:pointer}.tabs button.active,.main-btn{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}.form{display:none}.form.active{display:block}.input-group{margin-bottom:14px}label{display:block;color:#e2e8f0;font-size:13px;font-weight:800;margin-bottom:7px}input{width:100%;padding:14px;border-radius:14px;background:rgba(15,23,42,.65);border:1px solid rgba(255,255,255,.14);color:#fff;outline:none}input::placeholder{color:#64748b}.main-btn{width:100%;border:0;border-radius:14px;padding:14px;font-weight:900;margin-top:8px;cursor:pointer}.secondary{background:#334155!important}.message{text-align:center;margin-top:12px;font-weight:800;font-size:14px}
+    .app{display:none;max-width:620px;margin:0 auto;padding:22px 16px 96px}.app.active{display:block}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.logout{border:1px solid rgba(248,113,113,.4);background:rgba(127,29,29,.28);color:#fecaca;border-radius:999px;padding:10px 15px;font-weight:900;cursor:pointer}.card{padding:20px;margin-bottom:16px}.welcome{display:flex;align-items:center;gap:14px}.avatar{width:64px;height:64px;border-radius:22px;display:grid;place-items:center;background:linear-gradient(135deg,#22d3ee,#7c3aed);font-weight:950;font-size:22px}.badge{display:inline-block;margin-top:7px;padding:6px 10px;border-radius:999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#bbf7d0;font-size:12px;font-weight:900}.risk{padding:13px;border-radius:16px;background:rgba(234,179,8,.10);border:1px solid rgba(234,179,8,.25);color:#fde68a;font-size:13px;line-height:1.55;margin-top:12px}.big{font-size:48px;font-weight:950;margin:10px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mini{padding:14px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)}.mini p{color:#94a3b8;font-size:12px;margin-bottom:6px}.mini h3{font-size:20px;color:#dbeafe}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}.action{min-height:92px;border-radius:22px;border:1px solid rgba(255,255,255,.13);background:linear-gradient(145deg,rgba(37,99,235,.35),rgba(124,58,237,.18));color:#fff;font-weight:950;cursor:pointer}.page{display:none}.page.active{display:block}.back{border:0;background:rgba(255,255,255,.1);color:white;padding:10px 14px;border-radius:13px;font-weight:900;margin-bottom:14px;cursor:pointer}.wallet-box{padding:15px;border-radius:18px;background:rgba(0,0,0,.25);border:1px dashed rgba(96,165,250,.48);margin:14px 0;word-break:break-all}.wallet-box small{display:block;color:#94a3b8;margin-bottom:8px}.wallet-box strong{color:#bfdbfe;line-height:1.55}.history{display:grid;gap:12px;margin-top:12px}.item{padding:14px;border-radius:16px;background:rgba(15,23,42,.65);border:1px solid rgba(255,255,255,.10)}.item span{display:block;color:#cbd5e1;font-size:13px;line-height:1.55;word-break:break-word}.status-pending{color:#fde68a!important;font-weight:900}.status-approved{color:#22c55e!important;font-weight:900}.status-rejected{color:#f87171!important;font-weight:900}.bottom{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:calc(100% - 30px);max-width:560px;background:rgba(2,6,23,.9);border:1px solid rgba(255,255,255,.12);border-radius:24px;display:none;grid-template-columns:repeat(4,1fr);padding:12px 8px;backdrop-filter:blur(18px)}.bottom button{border:0;background:none;color:#94a3b8;font-weight:900;padding:8px;cursor:pointer}.bottom button.active{color:#93c5fd}.copyrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}.copyrow button{border:0;background:#334155;color:white;border-radius:12px;padding:12px;font-weight:900;cursor:pointer}.filter-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.filter-row button{padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.07);color:#cbd5e1;font-weight:900;cursor:pointer}.filter-row button.active{background:linear-gradient(135deg,#2563eb,#7c3aed);color:white}.terms{display:flex;gap:9px;align-items:flex-start;margin:12px 0}.terms input{width:auto;margin-top:3px}.terms label{font-weight:500;color:#cbd5e1;line-height:1.45}
+  </style>
+</head>
+<body>
+  <div id="authBox" class="auth-page">
+    <div class="container">
+      <div class="brand"><div class="small">Secure Wallet</div><h1>EarnSmart</h1><p class="muted">A user wallet for deposits, withdrawals and transparent transaction tracking.</p></div>
+      <div class="risk"><b>Important:</b> This app does not promise guaranteed profit or daily fixed ROI. Any deposit/withdraw must be verified by a real backend or admin process.</div>
+      <div class="tabs"><button id="loginTab" class="active" onclick="showLogin()">Login</button><button id="signupTab" onclick="showSignup()">Signup</button></div>
+
+      <form id="loginForm" class="form active">
+        <div class="input-group"><label>Email</label><input type="email" id="loginEmail" placeholder="you@example.com" required></div>
+        <div class="input-group"><label>Password</label><input type="password" id="loginPassword" minlength="6" required></div>
+        <button class="main-btn">Login</button><div id="loginMessage" class="message"></div>
+      </form>
+
+      <form id="signupForm" class="form">
+        <div class="input-group"><label>Full Name</label><input id="signupName" minlength="3" required></div>
+        <div class="input-group"><label>Email</label><input type="email" id="signupEmail" required></div>
+        <div class="input-group"><label>Phone Number</label><input id="signupPhone" minlength="8" required></div>
+        <div class="input-group"><label>Country</label><input id="signupCountry" required></div>
+        <div class="input-group"><label>Password</label><input type="password" id="signupPassword" minlength="6" required></div>
+        <div class="terms"><input type="checkbox" id="acceptTerms" required><label for="acceptTerms">I understand this is a wallet/transaction app, not a guaranteed earning scheme.</label></div>
+        <button class="main-btn">Create Account</button><div id="signupMessage" class="message"></div>
+      </form>
+    </div>
+  </div>
+
+  <main id="app" class="app">
+    <div class="topbar"><div><div class="small">EarnSmart Wallet</div><h1>Dashboard</h1></div><button class="logout" onclick="logout()">Logout</button></div>
+    <section class="card welcome"><div class="avatar" id="avatar">ES</div><div><div class="small">Welcome</div><h2 id="userName">User</h2><p class="muted">Wallet ID: <span id="walletId">-</span></p><span class="badge">Verified app session</span></div></section>
+    <section class="card"><p class="small">Available Balance</p><div class="big"><span id="totalBalance">0.00</span> USDT</div><div class="grid2"><div class="mini"><p>Deposit Balance</p><h3><span id="depositBalance">0.00</span> USDT</h3></div><div class="mini"><p>Reward / Adjustment</p><h3><span id="rewardBalance">0.00</span> USDT</h3></div></div><div class="risk">Balance changes only after a verified transaction is approved. Do not show fake ROI or guaranteed income claims.</div></section>
+    <section class="actions"><button class="action" onclick="openPage('depositPage')">↓<br>Deposit</button><button class="action" onclick="openPage('withdrawPage')">↑<br>Withdraw</button><button class="action" onclick="openHistoryPage()">☰<br>History</button></section>
+
+    <section id="depositPage" class="page card">
+      <button class="back" onclick="closePages()">← Back</button><h2>Create Deposit Request</h2><p class="muted">Minimum deposit: 50 USDT. Network: BEP20 only. Send payment first, then submit TXID for verification.</p>
+      <div class="wallet-box"><small>USDT BEP20 receiving wallet</small><div class="copyrow"><strong id="depositWalletAddress">0x22879e7dbcb2e6d2e1381dc8ff094cb75fb08e0c</strong><button type="button" onclick="copyText('depositWalletAddress')">Copy</button></div></div>
+      <form id="depositForm">
+        <div class="input-group"><label>Amount (USDT)</label><input type="number" id="depositAmount" min="50" step="0.01" placeholder="Minimum 50" required></div>
+        <div class="input-group"><label>Transaction Hash / TXID</label><input id="depositTxid" minlength="20" placeholder="Paste blockchain transaction hash" required></div>
+        <div class="input-group"><label>Method</label><input id="depositMethod" value="USDT BEP20" readonly></div>
+        <button class="main-btn">Submit for Verification</button><div id="depositMsg" class="message"></div>
+      </form>
+    </section>
+
+    <section id="withdrawPage" class="page card">
+      <button class="back" onclick="closePages()">← Back</button><h2>Withdraw Request</h2><p class="muted">Minimum withdraw: 30 USDT. Requests are processed after balance and wallet review.</p>
+      <form id="withdrawForm">
+        <div class="input-group"><label>Amount (USDT)</label><input type="number" id="withdrawAmount" min="30" step="0.01" placeholder="Minimum 30" required></div>
+        <div class="input-group"><label>USDT BEP20 Wallet Address</label><input id="withdrawWallet" minlength="20" placeholder="Your BEP20 wallet address" required></div>
+        <button class="main-btn">Submit Withdraw Request</button><div id="withdrawMsg" class="message"></div>
+      </form>
+    </section>
+
+    <section id="historyPage" class="page card">
+      <button class="back" onclick="closePages()">← Back</button><h2>Transaction History</h2>
+      <div class="filter-row"><button id="filterAll" class="active" onclick="setHistoryFilter('All')">All</button><button id="filterDeposit" onclick="setHistoryFilter('Deposit')">Deposit</button><button id="filterWithdraw" onclick="setHistoryFilter('Withdraw')">Withdraw</button><button id="filterRejected" onclick="setHistoryFilter('Rejected')">Rejected</button></div>
+      <div id="historyList" class="history"></div>
+    </section>
+
+    <section id="profilePage" class="page card">
+      <button class="back" onclick="closePages()">← Back</button><h2>Profile</h2><div id="profileBox" class="history"></div>
+    </section>
+  </main>
+
+  <nav class="bottom" id="bottomNav"><button class="active" onclick="closePages()">Home</button><button onclick="openPage('depositPage')">Deposit</button><button onclick="openHistoryPage()">History</button><button onclick="openProfilePage()">Profile</button></nav>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAbv-UrjDuAR8Es5rTRnt6MBguyBCwhuQ4",
+      authDomain: "earnsmart-addd8.firebaseapp.com",
+      projectId: "earnsmart-addd8",
+      storageBucket: "earnsmart-addd8.firebasestorage.app",
+      messagingSenderId: "537098039483",
+      appId: "1:537098039483:web:83e81bf69ad4e76226f99e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let currentUserId = null;
+    let currentUserData = null;
+    let cachedHistory = [];
+    let historyFilter = "All";
+    const $ = id => document.getElementById(id);
+    const pages = ["depositPage","withdrawPage","historyPage","profilePage"];
+
+    function code(n=8){const c="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";return Array.from({length:n},()=>c[Math.floor(Math.random()*c.length)]).join("");}
+    function msg(el,text,type){el.textContent=text;el.className="message "+type;}
+    function safeNumber(v){const n=Number(v);return Number.isFinite(n)?n:0;}
+    function setLoading(button,loading,text="Please wait..."){button.disabled=loading;button.style.opacity=loading?.55:1;if(loading){button.dataset.oldText=button.textContent;button.textContent=text;}else if(button.dataset.oldText){button.textContent=button.dataset.oldText;}}
+
+    window.showLogin=()=>{$("loginTab").classList.add("active");$("signupTab").classList.remove("active");$("loginForm").classList.add("active");$("signupForm").classList.remove("active");};
+    window.showSignup=()=>{$("signupTab").classList.add("active");$("loginTab").classList.remove("active");$("signupForm").classList.add("active");$("loginForm").classList.remove("active");};
+    window.closePages=()=>{pages.forEach(p=>$(p).classList.remove("active"));document.querySelectorAll(".bottom button").forEach((b,i)=>b.classList.toggle("active",i===0));};
+    window.openPage=id=>{closePages();$(id).classList.add("active");$(id).scrollIntoView({behavior:"smooth",block:"start"});};
+    window.logout=async()=>{await signOut(auth);location.reload();};
+    window.copyText=id=>navigator.clipboard.writeText($(id).textContent.trim()).then(()=>alert("Copied"));
+
+    async function loadUser(uid){
+      const snap = await getDoc(doc(db,"users",uid));
+      if(!snap.exists()) return null;
+      currentUserId = uid;
+      currentUserData = {id:uid,...snap.data()};
+      return currentUserData;
+    }
+
+    function showApp(user){
+      $("authBox").style.display="none";$("app").classList.add("active");$("bottomNav").style.display="grid";
+      const initials=(user.name||"ES").split(" ").map(x=>x[0]).join("").slice(0,2).toUpperCase();
+      $("avatar").textContent=initials;$("userName").textContent=user.name||"User";$("walletId").textContent=user.walletId||"-";
+      $("depositBalance").textContent=safeNumber(user.deposit).toFixed(2);$("rewardBalance").textContent=safeNumber(user.reward).toFixed(2);
+      $("totalBalance").textContent=(safeNumber(user.deposit)+safeNumber(user.reward)).toFixed(2);
+    }
+
+    async function saveRequest(item){
+      const id = Date.now().toString()+code(4);
+      await setDoc(doc(db,"requests",id),{id,uid:currentUserId,email:currentUserData.email,name:currentUserData.name,...item,createdAt:serverTimestamp()});
+    }
+
+    $("signupForm").addEventListener("submit",async e=>{
+      e.preventDefault();const btn=e.submitter;setLoading(btn,true,"Creating...");
+      try{
+        const email=$("signupEmail").value.trim().toLowerCase();const password=$("signupPassword").value;
+        const cred=await createUserWithEmailAndPassword(auth,email,password);
+        const data={uid:cred.user.uid,name:$("signupName").value.trim(),email,phone:$("signupPhone").value.trim(),country:$("signupCountry").value.trim(),walletId:"ESW-"+code(8),deposit:0,reward:0,isAdmin:false,createdAt:serverTimestamp()};
+        await setDoc(doc(db,"users",cred.user.uid),data);await loadUser(cred.user.uid);showApp(currentUserData);
+      }catch(err){msg($("signupMessage"),err.message,"error");}
+      finally{setLoading(btn,false);}
+    });
+
+    $("loginForm").addEventListener("submit",async e=>{
+      e.preventDefault();const btn=e.submitter;setLoading(btn,true,"Logging in...");
+      try{const cred=await signInWithEmailAndPassword(auth,$("loginEmail").value.trim().toLowerCase(),$("loginPassword").value);const user=await loadUser(cred.user.uid);if(user)showApp(user);}
+      catch(err){msg($("loginMessage"),"Email or password is incorrect.","error");}
+      finally{setLoading(btn,false);}
+    });
+
+    $("depositForm").addEventListener("submit",async e=>{
+      e.preventDefault();
+      const amount=safeNumber($("depositAmount").value);const txid=$("depositTxid").value.trim();
+      if(amount<50)return msg($("depositMsg"),"Minimum deposit is 50 USDT.","error");
+      if(txid.length<20)return msg($("depositMsg"),"Please enter a valid TXID.","error");
+      try{
+        await saveRequest({type:"Deposit",amount:amount.toFixed(2),method:"USDT BEP20",txid,detail:"TXID: "+txid,status:"Pending",date:new Date().toLocaleString()});
+        msg($("depositMsg"),"Deposit request submitted. It will be approved after verification.","success");e.target.reset();$("depositMethod").value="USDT BEP20";
+      }catch(err){msg($("depositMsg"),"Could not save request. Check Firestore rules.","error");}
+    });
+
+    $("withdrawForm").addEventListener("submit",async e=>{
+      e.preventDefault();
+      const amount=safeNumber($("withdrawAmount").value);const wallet=$("withdrawWallet").value.trim();const available=safeNumber(currentUserData.deposit)+safeNumber(currentUserData.reward);
+      if(amount<30)return msg($("withdrawMsg"),"Minimum withdraw is 30 USDT.","error");
+      if(wallet.length<20)return msg($("withdrawMsg"),"Please enter a valid BEP20 wallet address.","error");
+      if(amount>available)return msg($("withdrawMsg"),"Insufficient balance. Available: "+available.toFixed(2)+" USDT","error");
+      try{await saveRequest({type:"Withdraw",amount:amount.toFixed(2),method:"USDT BEP20",wallet,detail:"Withdraw wallet: "+wallet,status:"Pending",date:new Date().toLocaleString()});msg($("withdrawMsg"),"Withdraw request submitted. Status: Pending.","success");e.target.reset();}
+      catch(err){msg($("withdrawMsg"),"Could not save request. Check Firestore rules.","error");}
+    });
+
+    window.setHistoryFilter=function(type){historyFilter=type;["All","Deposit","Withdraw","Rejected"].forEach(x=>$("filter"+x)?.classList.toggle("active",x===type));renderHistory();};
+    function renderHistory(){
+      let arr=[...cachedHistory];
+      if(historyFilter==="Deposit")arr=arr.filter(x=>x.type==="Deposit");
+      if(historyFilter==="Withdraw")arr=arr.filter(x=>x.type==="Withdraw");
+      if(historyFilter==="Rejected")arr=arr.filter(x=>x.status==="Rejected");
+      $("historyList").innerHTML=arr.length?arr.map(x=>{const cls=x.status==="Approved"?"status-approved":x.status==="Rejected"?"status-rejected":"status-pending";return `<div class="item"><strong>${x.type||"-"} - ${x.amount||"0"} USDT</strong><span class="${cls}">Status: ${x.status||"-"}</span><span>Method: ${x.method||"-"}</span><span>${x.detail||"-"}</span><span>Date: ${x.date||"-"}</span></div>`}).join(""):'<div class="item"><strong>No history yet</strong></div>';
+    }
+    window.openHistoryPage=async()=>{openPage("historyPage");const snap=await getDocs(query(collection(db,"requests"),where("uid","==",currentUserId)));cachedHistory=[];snap.forEach(d=>cachedHistory.push(d.data()));cachedHistory.sort((a,b)=>String(b.id).localeCompare(String(a.id)));renderHistory();};
+    window.openProfilePage=()=>{openPage("profilePage");const u=currentUserData;$("profileBox").innerHTML=`<div class="item"><strong>Name</strong><span>${u.name||"-"}</span></div><div class="item"><strong>Email</strong><span>${u.email||"-"}</span></div><div class="item"><strong>Phone</strong><span>${u.phone||"-"}</span></div><div class="item"><strong>Country</strong><span>${u.country||"-"}</span></div><div class="item"><strong>Wallet ID</strong><span>${u.walletId||"-"}</span></div>`;};
+
+    onAuthStateChanged(auth,async user=>{if(user){const data=await loadUser(user.uid);if(data)showApp(data);}});
+  </script>
+</body>
+</html>
